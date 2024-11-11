@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="comment-field-save"
+            type="Rasel\CustomModule\Plugin\ShippingInformationManagement" sortOrder="1"/>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="region_record_grid_list_data_source" xsi:type="string">Rasel\CustomModule\Model\ResourceModel\Item\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Rasel\CustomModule\Api\RegionRepositoryInterface" type="Rasel\CustomModule\Model\ItemRepository"/>
+</config>

@@ -1,0 +1,7 @@
+<?php $order = $block->getOrder(); ?>
+<?php if ($order) : ?>
+<div class="customer-order-comment">
+    <h3>Order Comments</h3>
+    <p><?php echo $order->getComment(); ?></p>
+</div>
+<?php endif; ?>

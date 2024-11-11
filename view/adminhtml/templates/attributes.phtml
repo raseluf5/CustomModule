@@ -1,0 +1,27 @@
+<?php $order = $block->getOrder(); ?>
+<?php if ($order) : ?>
+<section class="admin__page-section order-additional-information">
+    <div class="admin__page-section-title">
+        <strong class="title"><?php echo /* @escapeNotVerified */ __('Additional Information'); ?></strong>
+    </div>
+    <div id="<?php echo $block->getHtmlId() ?>"
+         class="admin__page-section-content order-additional-information-container">
+        <div class="admin__page-section-item order-information">
+            <div class="admin__page-section-item-content">
+                <div class="admin__page-section-item">
+                    <div class="customer-order-comment">
+                        <h3>Order Comments</h3>
+                        <p><?php echo $order->getComment(); ?></p>
+                    </div>
+                </div>
+                <div class="admin__page-section-item">
+                    <div class="customer-order-comment">
+                        <h3>Region</h3>
+                        <p><?php echo $order->getCustomRegion(); ?></p>
+                    </div>
+                </div>      
+            </div>
+        </div>
+    </div>
+</section>
+<?php endif; ?>

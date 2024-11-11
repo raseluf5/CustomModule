@@ -1,0 +1,56 @@
+<?php
+/** \Rasel\CustomModule\Block\Widget\SubCategory $block */
+?>
+
+<?php 
+$categories_id_path = $block->getData('id_path');
+$widget_selected_id = (int) str_replace('category/', '', $categories_id_path);
+$categoryHelper = $this->getCategoryHelper();
+
+$subCat = $this->getSubCategory($widget_selected_id);
+$store_code = $this->getStoreId();
+
+
+if($store_code != ''){
+    $base_url = $block->getBaseUrl();
+    
+    if (str_contains($base_url, $store_code)) { 
+        $base_url = str_replace($store_code, '', $base_url);
+        if(substr($base_url, -1) == '/') {
+            $base_url = substr($base_url, 0, -2);
+        }
+    }else{
+        if(substr($base_url, -1) == '/') {
+            $base_url = substr($base_url, 0, -1);
+        }
+
+    }  
+}else{
+    $base_url = $block->getBaseUrl();
+    if(substr($base_url, -1) == '/') {
+        $base_url = substr($base_url, 0, -1);
+    }
+}
+
+?><div class="category-container"><?php
+
+foreach($subCat as $cat){
+    $categoryUrl = $categoryHelper->getCategoryUrl($cat);
+    $categoryName = $cat->getName();
+    $category_directory = $this->getCategoryImage($cat->getId());
+    $category_directory = substr($category_directory, strpos($category_directory, '/media/catalog/category/'));
+
+    $category_image_url = $base_url.''.$category_directory; ?>
+    
+    <div class="category-item">
+        <?php if($category_directory != ''):?>
+            <a href="<?php echo $categoryUrl ?>"><img src="<?php echo $category_image_url; ?>" alt=""></a>
+        <?php endif;?>
+        <a href="<?php echo $categoryUrl ?>"><h3><?php echo $categoryName; ?></h3></a>
+    </div>
+
+    <?php
+}
+?></div><?php
+
+
